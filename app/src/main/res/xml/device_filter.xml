@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- CH340 (Uno clone): 0x1A86 / 0x7523 -->
+    <usb-device vendor-id="6790" product-id="29987" />
+    <!-- Arduino original: 0x2341 -->
+    <usb-device vendor-id="9025" />
+</resources>
