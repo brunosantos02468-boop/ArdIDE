@@ -75,7 +75,7 @@ fun IdeScreen(vm: IdeViewModel) {
             Text(numbers, Modifier.width(44.dp).padding(end = 10.dp), style = mono.copy(color = Ide.faint, textAlign = TextAlign.End))
             BasicTextField(
                 value = vm.code, onValueChange = { vm.code = it },
-                textStyle = mono.copy(color = Ide.text), softWrap = false,
+                textStyle = mono.copy(color = Ide.text),
                 cursorBrush = SolidColor(Ide.teal), visualTransformation = remember { CppHighlighter() },
                 modifier = Modifier.horizontalScroll(rememberScrollState()).defaultMinSize(minWidth = 300.dp, minHeight = 300.dp)
             )
