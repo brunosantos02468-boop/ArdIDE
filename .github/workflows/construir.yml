@@ -1,0 +1,36 @@
+name: Construir
+on:
+  push:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Extrair projeto
+        run: |
+          if [ -f ArduinoIdeAndroid.zip ]; then
+            unzip -q ArduinoIdeAndroid.zip
+            rm -rf ArduinoIdeAndroid/.github
+            cp -a ArduinoIdeAndroid/. .
+            rm -rf ArduinoIdeAndroid ArduinoIdeAndroid.zip
+            git config user.name "github-actions"
+            git config user.email "actions@users.noreply.github.com"
+            git add -A
+            git commit -m "Extrai o projeto"
+            git push
+          fi
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: 8.9
+      - run: gradle assembleDebug
+      - uses: actions/upload-artifact@v4
+        with:
+          name: app-debug
+          path: app/build/outputs/apk/debug/app-debug.apk
